@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prešeren Escape Room</title>
+    <title>Joelova Soba Pobega</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>Welcome to Prešeren's Literary Escape</h1>
-        <div class="intro-text">
-            <p>Are you ready to test your knowledge about Slovenia's greatest poet?</p>
-            <p>Enter the mysterious world of France Prešeren and solve puzzles about his life and work to escape!</p>
-        </div>
-        <div class="start-section">
-            <form action="{% url 'game' %}" method="GET">
-                <input type="text" name="player_name" placeholder="Enter your name" required>
-                <button type="submit" class="start-btn">Enter the Room</button>
-            </form>
+<body class="landing-page">
+    <div class="landing-container">
+        <div class="content-wrapper">
+            <div class="image-section">
+                <img src="{% static 'images/preseren.jpg' %}" alt="France Prešeren" class="preseren-image">
+                <div class="image-overlay"></div>
+            </div>
+            <div class="text-section">
+                <h1>Joelova Soba Pobega</h1>
+                <div class="intro-text">
+                    <p class="quote">"O Vrba! srečna, draga vas domača..."</p>
+                    <p class="description">Vstopite v skrivnostni svet največjega slovenskega pesnika. Ali lahko razvozlate skrivnosti življenja in dela Franceta Prešerna?</p>
+                </div>
+                <div class="start-section">
+                    <form action="{% url 'game' %}" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="player_name" placeholder="Vnesite svoje ime" required>
+                            <button type="submit" class="start-btn">Začni Pustolovščino</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>

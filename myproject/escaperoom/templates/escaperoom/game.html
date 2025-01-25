@@ -1,56 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape the Room - Prešeren Challenge</title>
+    <title>Prešernova Soba Pobega - Izziv</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="game-page">
     <div class="game-container">
         <div class="room-container">
             <!-- Left side - Room with clickable items -->
             <div class="room">
+                <div class="room-background"></div>
                 <div class="item" data-question="0">
-                    <i class="fas fa-book" title="Old Book"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>V Vrbi na Gorenjskem rojen,<br>
+                            kjer mati me je zibala,<br>
+                            tam prve sem besede tkál...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-book" title="Stara knjiga"></i>
                 </div>
                 <div class="item" data-question="1">
-                    <i class="fas fa-feather-alt" title="Quill"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Zdravljica, pesem vseh ljudi,<br>
+                            naj v srcu našem večno živi,<br>
+                            kot himna svobode doni...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-feather-alt" title="Pero"></i>
                 </div>
                 <div class="item" data-question="2">
-                    <i class="fas fa-university" title="Building"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Na Dunaju učenost iskal,<br>
+                            med knjigami življenje bral,<br>
+                            pravnik postal...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-university" title="Univerza"></i>
                 </div>
                 <div class="item" data-question="3">
-                    <i class="fas fa-heart" title="Heart"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Julija, zvezda vodnica,<br>
+                            v srcu večna bolečina,<br>
+                            ljubezni neuslišana...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-heart" title="Srce"></i>
                 </div>
                 <div class="item" data-question="4">
-                    <i class="fas fa-flag" title="Flag"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Žive naj vsi narodi,<br>
+                            ki hrepene dočakat dan,<br>
+                            da, koder sonce hodi...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-flag" title="Zastava"></i>
                 </div>
                 <div class="item" data-question="5">
-                    <i class="fas fa-clock" title="Clock"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>V Ljubljani, kjer pesmi so spale,<br>
+                            februarja osem sto štiriinpetdeset,<br>
+                            zadnjič so oči gledale...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-clock" title="Ura"></i>
                 </div>
-                <!-- Decoy items -->
+                <!-- Decoy items with misleading hints -->
                 <div class="item decoy">
-                    <i class="fas fa-key" title="Key"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Le čemu ta ključ iskati,<br>
+                            ko pa nič ne odklepa...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-key" title="Ključ"></i>
                 </div>
                 <div class="item decoy">
-                    <i class="fas fa-scroll" title="Scroll"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>Prazen zvitek, prazne sanje,<br>
+                            tu ni prave poti zate...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-scroll" title="Zvitek"></i>
                 </div>
                 <div class="item decoy">
-                    <i class="fas fa-wine-bottle" title="Bottle"></i>
+                    <div class="poetic-hint">
+                        <div class="parchment">
+                            <p>V vinu resnice ni,<br>
+                            drugje jo poišči...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-wine-bottle" title="Steklenica"></i>
                 </div>
             </div>
 
             <!-- Right side - Progress panel -->
             <div class="progress-panel">
-                <h3>Escape Progress</h3>
+                <h3>Napredek</h3>
+                <div class="score-section">
+                    <p>Točke: <span id="current-score">100</span></p>
+                </div>
+                <div class="timer-section">
+                    <p>Preostali čas: <span id="timer">6:00</span></p>
+                    <div class="timer-bar">
+                        <div class="timer-progress"></div>
+                    </div>
+                </div>
                 <div class="questions-remaining">
-                    <p>Questions Remaining: <span id="remaining-count">6</span></p>
+                    <p>Preostala vprašanja: <span id="remaining-count">6</span></p>
                 </div>
                 <div class="solved-items">
-                    <h4>Solved Items:</h4>
+                    <h4>Odkrite skrivnosti:</h4>
                     <ul id="solved-list">
                         <!-- Will be populated by JavaScript -->
                     </ul>
