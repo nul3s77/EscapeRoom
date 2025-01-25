@@ -1,7 +1,7 @@
 const allItems = [
     {
         type: 'question',
-        question: "In which year was France Prešeren born?",
+        question: "Katerega leta se je rodil France Prešeren?",
         answers: ["1800", "1797", "1805", "1789", "1795", "1802"],
         correct: 0,
         icon: "book",
@@ -10,7 +10,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "What is Prešeren's most famous poem?",
+        question: "Katera je Prešernova najbolj znana pesem?",
         answers: ["Zdravljica", "Povodni mož", "Krst pri Savici", "Sonetni venec", "Glosa", "Gazele"],
         correct: 0,
         icon: "feather-alt",
@@ -19,8 +19,8 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Where did Prešeren study law?",
-        answers: ["Ljubljana", "Vienna", "Graz", "Prague", "Budapest", "Zagreb"],
+        question: "Kje je Prešeren študiral pravo?",
+        answers: ["Ljubljana", "Dunaj", "Gradec", "Praga", "Budimpešta", "Zagreb"],
         correct: 1,
         icon: "university",
         itemName: "Univerza",
@@ -28,7 +28,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Who was Prešeren's unrequited love?",
+        question: "Kdo je bila Prešernova neuslišana ljubezen?",
         answers: ["Ana Jelovšek", "Primicova Julija", "Jerneja Kopitar", "Marija Potočnik", "Katra Prešeren", "Urška Plemel"],
         correct: 1,
         icon: "heart",
@@ -37,7 +37,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Which poem by Prešeren became the national anthem of Slovenia?",
+        question: "Katera Prešernova pesem je postala slovenska himna?",
         answers: ["Zdravljica", "Krst pri Savici", "Sonetni venec", "Povodni mož", "Neiztrohnjeno srce", "Magistrale"],
         correct: 0,
         icon: "flag",
@@ -46,7 +46,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "In which year did Prešeren die?",
+        question: "Katerega leta je Prešeren umrl?",
         answers: ["1855", "1848", "1850", "1849", "1847", "1851"],
         correct: 3,
         icon: "clock",
@@ -55,7 +55,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Where did Prešeren work as a lawyer?",
+        question: "Kje je Prešeren delal kot odvetnik?",
         answers: ["Ljubljana", "Kranj", "Celje", "Maribor"],
         correct: 1,
         icon: "balance-scale",
@@ -64,8 +64,8 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Which language did Prešeren use to write some of his poems?",
-        answers: ["German", "Latin", "Italian", "French"],
+        question: "V katerem tujem jeziku je Prešeren tudi pisal pesmi?",
+        answers: ["Nemščina", "Latinščina", "Italijanščina", "Francoščina"],
         correct: 0,
         icon: "language",
         itemName: "Jezik",
@@ -73,7 +73,7 @@ const allItems = [
     },
     {
         type: 'question',
-        question: "Who was Prešeren's close friend and fellow poet?",
+        question: "Kdo je bil Prešernov najboljši prijatelj in pesnik?",
         answers: ["Matija Čop", "Valentin Vodnik", "Jernej Kopitar", "Urban Jarnik"],
         correct: 0,
         icon: "users",
@@ -138,11 +138,9 @@ function shuffleQuestionAnswers(item) {
     return item;
 }
 
-// Initialize game with shuffled items
 function initializeGame() {
     // Shuffle all items and their answers
-    const shuffledItems = shuffleArray([...allItems]).map(item => shuffleQuestionAnswers({...item}));
-    
+    const shuffledItems = shuffleArray([...allItems]).slice(0, 9).map(item => shuffleQuestionAnswers({...item}));
     // Create room items HTML
     const room = document.querySelector('.room');
     room.innerHTML = '<div class="room-background"></div>';
@@ -317,8 +315,8 @@ function finishGame() {
     // Get player name from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const playerName = urlParams.get('player_name');
-    // Redirect to finish page with score and player name
-    window.location.href = `/finish?score=${currentScore}&player_name=${playerName}`;
+    // Redirect to store_score instead of finish
+    window.location.href = `/store_score?score=${currentScore}&player_name=${playerName}`;
 }
 
 // Add this function to format time

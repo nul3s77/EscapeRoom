@@ -1,39 +1,67 @@
+{% load static %}
+{% load escaperoom_extras %}
+
 <!DOCTYPE html>
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Čestitke!</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="landing-page">
     <div class="landing-container">
-        <div class="content-wrapper">
-            <div class="image-section">
-                <img src="{% static 'images/preseren.jpg' %}" alt="France Prešeren" class="preseren-image">
-                <div class="image-overlay"></div>
-            </div>
-            <div class="text-section finish-content">
-                <h1>Čestitke, {{ player_name }}!</h1>
-                <div class="success-message">
-                    <p class="quote">"Kdor išče cilj, bo ostal prazen, kdor najde pot, bo cilj nosil v sebi."</p>
-                    <p class="description">Uspešno ste pobegnili iz sobe s svojim znanjem o Francetu Prešernu!</p>
-                    <div class="stats">
-                        <p>Končne točke: <span class="highlight">{{ score }}</span></p>
-                        <p>Čas reševanja: <span class="highlight">{{ time_taken }}</span></p>
-                        <div class="star-rating" id="starRating"></div>
+        <div class="content-wrapper finish-layout">
+            <div class="finish-main">
+                <div class="text-section finish-content">
+                    <h1>Čestitke, {{ player_name }}!</h1>
+                    <div class="success-message">
+                        <p class="quote">"Kdor išče cilj, bo ostal prazen, kdor najde pot, bo cilj nosil v sebi."</p>
+                        <p class="description">Uspešno ste pobegnili iz sobe s svojim znanjem o Francetu Prešernu!</p>
+                        <div class="stats">
+                            <p>Končne točke: <span class="highlight">{{ score }}</span></p>
+                            <p>Čas reševanja: <span class="highlight">{{ time_taken }}</span></p>
+                            <div class="star-rating" id="starRating"></div>
+                            <p class="player-position">Uvrstili ste se na <span class="highlight">{{ position }}. mesto</span></p>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="{% url 'index' %}" class="btn">Igraj Ponovno</a>
                     </div>
                 </div>
-                <div class="action-buttons">
-                    <a href="{% url 'index' %}" class="btn">Igraj Ponovno</a>
-                
+            </div>
+
+            <!-- Scoreboard Section -->
+            <div class="scoreboard">
+                <h2>Top 10 Rezultatov</h2>
+                <div class="scoreboard-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mesto</th>
+                                <th>Ime</th>
+                                <th>Točke</th>
+                                <th>Čas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for score_entry in scores|slice:":10" %}
+                            <tr {% if score_entry.username == player_name and score_entry.score == score %}class="current-player"{% endif %}>
+                                <td>{{ forloop.counter }}.</td>
+                                <td>{{ score_entry.username }}</td>
+                                <td>{{ score_entry.score }}</td>
+                                <td>{{ score_entry.time_taken|format_time }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                <div class="creator-credit">
-                    Created by Joel Semenic
-                </div>
+            </div>
+            
+            <div class="creator-credit">
+                Created by Joel Semenic
             </div>
         </div>
     </div>
@@ -44,20 +72,12 @@
             const starRating = document.getElementById('starRating');
             let stars = 0;
 
-            // Determine number of stars based on score
-            if (score >= 80) {
-                stars = 5;
-            } else if (score >= 60) {
-                stars = 4;
-            } else if (score >= 40) {
-                stars = 3;
-            } else if (score >= 25) {
-                stars = 2;
-            } else {
-                stars = 1;
-            }
+            if (score >= 80) stars = 5;
+            else if (score >= 60) stars = 4;
+            else if (score >= 40) stars = 3;
+            else if (score >= 25) stars = 2;
+            else stars = 1;
 
-            // Create stars HTML
             let starsHTML = '';
             for (let i = 0; i < stars; i++) {
                 starsHTML += '<i class="fas fa-star"></i>';
