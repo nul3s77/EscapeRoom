@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="finish-container">
+        <h1>Congratulations, {{ player_name }}!</h1>
+        <div class="success-message">
+            <p>You've successfully escaped the room by mastering your knowledge of France Prešeren!</p>
+            <p>Time taken: <span id="time-taken">{{ time_taken }}</span></p>
+        </div>
+        <div class="action-buttons">
+            <a href="{% url 'index' %}" class="btn">Play Again</a>
+            <button id="share-result" class="btn">Share Result</button>
+        </div>
+    </div>
+</body>
+</html> 

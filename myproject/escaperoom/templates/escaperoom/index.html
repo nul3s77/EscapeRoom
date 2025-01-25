@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prešeren Escape Room</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Prešeren's Literary Escape</h1>
+        <div class="intro-text">
+            <p>Are you ready to test your knowledge about Slovenia's greatest poet?</p>
+            <p>Enter the mysterious world of France Prešeren and solve puzzles about his life and work to escape!</p>
+        </div>
+        <div class="start-section">
+            <form action="{% url 'game' %}" method="GET">
+                <input type="text" name="player_name" placeholder="Enter your name" required>
+                <button type="submit" class="start-btn">Enter the Room</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
